@@ -1,5 +1,5 @@
 { stdenv, fetchurl, makeWrapper
-, perlPackages, flac, faad2, sox, lame, monkeysAudio, wavpack }:
+, spotty, perlPackages, flac, faad2, sox, lame, monkeysAudio, wavpack }:
 
 perlPackages.buildPerlPackage rec {
   pname = "slimserver";
@@ -89,7 +89,7 @@ perlPackages.buildPerlPackage rec {
   installPhase = ''
     cp -r . $out
     wrapProgram $out/slimserver.pl \
-      --prefix PATH : "${stdenv.lib.makeBinPath [ lame flac faad2 sox monkeysAudio wavpack ]}"
+      --prefix PATH : "${stdenv.lib.makeBinPath [ spotty lame flac faad2 sox monkeysAudio wavpack ]}"
   '';
 
   outputs = [ "out" ];
