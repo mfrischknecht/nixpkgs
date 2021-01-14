@@ -605,6 +605,8 @@ in
 
   abcmidi = callPackage ../tools/audio/abcmidi { };
 
+  spotty = callPackage ../tools/audio/spotty { };
+
   abduco = callPackage ../tools/misc/abduco { };
 
   acct = callPackage ../tools/system/acct { };
