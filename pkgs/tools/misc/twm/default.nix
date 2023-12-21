@@ -1,5 +1,6 @@
 { lib
 , fetchFromGitHub
+, fetchpatch
 , stdenv
 , rustPlatform
 , openssl
@@ -22,6 +23,16 @@ rustPlatform.buildRustPackage rec {
 
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [ openssl ] ++ lib.optionals stdenv.isDarwin [ Security ];
+
+  patches = [
+    # Fixes aarch64 build due to architecture dependent C string pointer types.
+    # Can be removed as soon as this is merged: https://github.com/vinnymeller/twm/pull/13/commits
+    (fetchpatch {
+      name = "fix-aarch64-build.nix";
+      url = "https://github.com/vinnymeller/twm/pull/13/commits/8fdcaca51baee3ee6a23a37c84d8a47adf6c20fe.patch";
+      hash = "sha256-kDRzBGkU3AOGuJF8xPbM7c3QbiaX0odT3QvQ+CEzDY0=";
+    })
+  ];
 
   meta = with lib; {
     description = "A customizable workspace manager for tmux";
