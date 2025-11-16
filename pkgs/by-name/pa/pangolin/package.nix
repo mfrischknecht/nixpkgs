@@ -3,12 +3,14 @@
   lib,
   fetchFromGitHub,
   cmake,
+  python3,
   pkg-config,
   doxygen,
   libGL,
   glew,
   xorg,
   ffmpeg,
+  libepoxy,
   libjpeg,
   libpng,
   libtiff,
@@ -17,19 +19,20 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "pangolin";
-  version = "0.9.1";
+  version = "0.9.4";
 
   src = fetchFromGitHub {
     owner = "stevenlovegrove";
     repo = "Pangolin";
     rev = "v${finalAttrs.version}";
-    sha256 = "sha256-B5YuNcJZHjR3dlVs66rySi68j29O3iMtlQvCjTUZBeY=";
+    hash = "sha256-bv0oBn/3r8vNN/DlXGtZzP2EVH0bjygsMRbsUx/dJAs=";
   };
 
   nativeBuildInputs = [
     cmake
     pkg-config
     doxygen
+    python3
   ];
 
   buildInputs = [
@@ -37,6 +40,7 @@ stdenv.mkDerivation (finalAttrs: {
     glew
     xorg.libX11
     ffmpeg
+    libepoxy
     libjpeg
     libpng
     libtiff.out
